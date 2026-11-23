@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111216">
+  <meta name="description" content="Liberum Ludos — discover free game giveaways across platforms.">
+  <title>Liberum Ludos — The Archive of Free Games</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E⚔%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Liberum Ludos home">
+      <span class="brand-mark">⚔</span>
+      <span><strong>LIBERUM LUDOS</strong><small>THE ARCHIVE OF FREE GAMES</small></span>
+    </a>
+    <nav class="header-nav">
+      <a href="#giveaways">Giveaways</a><a href="#about">About</a>
+      <button id="refreshBtn" class="button button-quiet" type="button">↻ <span>Refresh</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT ADVENTURE COSTS NOTHING</div>
+        <h1>Claim your next<br><em>adventure.</em></h1>
+        <p class="hero-lede">A growing archive of free games, limited-time giveaways, downloadable content, and playtests from across the gaming world.</p>
+        <a class="button button-gold" href="#giveaways">Explore the archive <span>→</span></a>
+      </div>
+      <div class="hero-seal" aria-hidden="true">
+        <div class="seal-ring"><div class="seal-inner"><span>✦</span><b>LL</b><span>✦</span></div></div>
+        <div class="seal-caption">LIBERUM · LUDOS<br><small>FREE GAMES FOR ALL</small></div>
+      </div>
+      <div class="hero-rule"></div>
+      <div class="stats">
+        <div><strong id="statActive">—</strong><span>ACTIVE OFFERS</span></div>
+        <div><strong id="statEnding">—</strong><span>ENDING IN 48H</span></div>
+        <div><strong id="statSources">1</strong><span>CONNECTED SOURCE</span></div>
+        <div class="updated"><span class="status-dot"></span><span id="lastUpdated">Awaiting first refresh</span></div>
+      </div>
+    </section>
+
+    <section id="giveaways" class="archive-section">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE COLLECTION</div><h2>Active giveaways</h2><p>Every offer is a chance to add something new to your library.</p></div>
+        <div class="view-controls">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search games, stores, platforms…" autocomplete="off"></label>
+          <select id="sortSelect" aria-label="Sort giveaways"><option value="ending">Ending soon</option><option value="newest">Recently added</option><option value="title">Title A–Z</option></select>
+        </div>
+      </div>
+
+      <div class="filter-panel">
+        <div class="filter-group">
+          <span class="filter-label">OFFER TYPE</span>
+          <div class="chips" id="typeFilters">
+            <button class="chip active" data-type="all">All offers</button>
+            <button class="chip active" data-type="game">Full games</button>
+            <button class="chip active" data-type="dlc">DLC</button>
+            <button class="chip active" data-type="loot">In-game loot</button>
+            <button class="chip active" data-type="beta">Beta access</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">PLATFORM</span>
+          <select id="platformSelect" aria-label="Filter by platform"><option value="all">All platforms</option></select>
+        </div>
+        <label class="toggle-label"><input id="endingToggle" type="checkbox"><span class="toggle"></span> Ending within 48 hours</label>
+      </div>
+
+      <div class="results-bar"><span id="resultCount">Loading offers…</span><span id="sourceStatus" class="source-status">Connecting to giveaway sources</span></div>
+      <div id="errorNotice" class="notice hidden" role="status"></div>
+      <div id="giveawayGrid" class="giveaway-grid" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state hidden"><div class="empty-icon">✧</div><h3>No offers found</h3><p>Try changing your filters, or refresh the archive.</p><button class="button button-outline" id="clearFiltersBtn">Clear filters</button></div>
+      <div class="attribution">Giveaway data provided in part by <a href="https://www.gamerpower.com/" target="_blank" rel="noopener">GamerPower</a>. Always verify offer details and eligibility on the giveaway page.</div>
+    </section>
+
+    <section id="about" class="about-strip">
+      <div class="about-icon">✦</div><div><div class="eyebrow">THE PURPOSE</div><h2>More games. Fewer barriers.</h2><p>Liberum Ludos is a community-built index for discovering legitimate free-game offers. We link to the original giveaway pages; claims, eligibility, and regional restrictions are controlled by each provider.</p></div>
+    </section>
+  </main>
+
+  <footer><a class="footer-brand" href="#">⚔ LIBERUM LUDOS</a><span>Independent community project · Not affiliated with listed stores or giveaway providers</span><a href="https://www.gamerpower.com/" target="_blank" rel="noopener">Data by GamerPower ↗</a></footer>
+
+  <dialog id="shareDialog" class="share-dialog">
+    <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+    <div class="eyebrow">SPREAD THE WORD</div><h2 id="shareTitle">Share this offer</h2>
+    <p class="dialog-subtitle" id="shareSubtitle"></p>
+    <div class="platform-tabs" role="tablist">
+      <button class="platform-tab active" data-platform="discord">Discord</button>
+      <button class="platform-tab" data-platform="x">X</button>
+      <button class="platform-tab" data-platform="reddit">Reddit</button>
+      <button class="platform-tab" data-platform="facebook">Facebook</button>
+      <button class="platform-tab" data-platform="bluesky">Bluesky</button>
+      <button class="platform-tab" data-platform="telegram">Telegram</button>
+    </div>
+    <textarea id="shareText" rows="9" spellcheck="false"></textarea>
+    <div class="dialog-actions"><button id="copyMessageBtn" class="button button-gold">Copy message</button><button id="downloadCardBtn" class="button button-outline">Download share image</button></div>
+    <p class="fine-print">Check the destination platform's current character limits and formatting before posting. Generated images use the available offer artwork.</p>
+  </dialog>
+
+  <canvas id="shareCanvas" width="1200" height="630" class="hidden"></canvas>
+  <script src="./app.js"></script>
+</body>
+</html>
